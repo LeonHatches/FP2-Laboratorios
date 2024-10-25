@@ -1,12 +1,12 @@
 
     public class Soldado
     {
-        private String  nombre, columna;
+        private String  nombre, columna, ejercito;
         private int     vida, fila;
         
         public Soldado ()
         {
-            nombre = "";
+            nombre = "          ";
         }
 
         public void setNombre (String n) {
@@ -21,6 +21,9 @@
         public void setColumna (String c) {
                 columna = c;
         }
+        public void setEjercito (String e) {
+            ejercito = e;
+        }
 
         public String getNombre ()
         {	return nombre;	}
@@ -33,6 +36,9 @@
 
         public String getColumna ()
         {	return columna;	}
+        
+        public String getEjercito ()
+        {       return ejercito;    }
             
         public String toString ()
         {
