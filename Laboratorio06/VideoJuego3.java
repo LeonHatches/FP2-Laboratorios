@@ -1,4 +1,6 @@
     
+	// LABORATORIO 06 - METODOS ADAPTADOS A ARRAYLIST Y CORREGIDO
+
     import java.util.ArrayList;
     public class VideoJuego3
     {
@@ -7,20 +9,21 @@
             ArrayList <Soldado> ejercito1 = new ArrayList <Soldado>();
             ArrayList <Soldado> ejercito2 = new ArrayList <Soldado>();
             
-            // LABORATORIO 06 - LISTA DE LOS NUEVOS METODOS
             ArrayList<ArrayList<Soldado>> tablero = new ArrayList <ArrayList<Soldado>>();
+            
+            // Inicializacion de un tablero vacio para trabajar 
             inicializarVacio(tablero);
             
             // NOTA IMPORTANTE: Los ejercitos se ubicaran al final como STRINGS, 1 y 2
-            crear (tablero, ejercito1, "1");
-            crear (tablero, ejercito2, "2");
-            mostrarTabla        (tablero);
+            crear 			(tablero, ejercito1, "1");
+            crear			(tablero, ejercito2, "2");
+            mostrarTabla    (tablero);
             
-            // Los de mayor vida segun ejercito
+            // Mostrar los de mayor vida segun el ejercito
             mostrarMayorVida    (tablero, "1");
             mostrarMayorVida    (tablero, "2");
             
-            // Vida promedio
+            // Vida promedio de cada ejercito
             double vida1 = mostrarPromedioVida (tablero, "1");
             double vida2 = mostrarPromedioVida (tablero, "2");
             
@@ -51,8 +54,12 @@
             mostrarRankingMenor (ejercito2);
             
             // GANADOR
-            if (vida1 > vida2)
-                System.out.println("\n| EJERCITO 1 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
+            if (vida1 == vida2)
+            	System.out.println("\n| EMPATE POR VIDA DEL EJERCITO IGUALES |");
+            
+            else if (vida1 > vida2)
+            	System.out.println("\n| EJERCITO 1 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
+            
             else
                 System.out.println("\n| EJERCITO 2 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
         }
@@ -65,6 +72,18 @@
         public static int vida ()
         {
             return (int) (Math.random() * 5 + 1);
+        }
+        
+        public static void inicializarVacio (ArrayList< ArrayList<Soldado> > tablero)
+        {
+           for (int i = 0 ; i < 10 ; i++)
+            {
+                tablero.add( new ArrayList<Soldado>() );
+                for (int j = 0 ; j < 10 ; j++)
+                {
+                  tablero.get(i).add( new Soldado() );
+                }
+            }
         }
         
         public static void crear (ArrayList< ArrayList<Soldado> > tablero, ArrayList<Soldado> ejercito, String e)
@@ -84,20 +103,8 @@
                 // INICIALIZA DATOS DEL SOLDADO
                 inicializar (tablero, fila, columna, i, e);
 
-                // ARREGLO ESTANDAR PARA TRABAJAR CON ORDENAMIENTO
+                // ARRAYLIST ESTANDAR PARA TRABAJAR CON ORDENAMIENTO
                 ejercito.add( tablero.get(fila).get(columna) );
-            }
-        }
-       
-        public static void inicializarVacio (ArrayList< ArrayList<Soldado> > tablero)
-        {
-           for (int i = 0 ; i < 10 ; i++)
-            {
-                tablero.add( new ArrayList<Soldado>() );
-                for (int j = 0 ; j < 10 ; j++)
-                {
-                  tablero.get(i).add( new Soldado() );
-                }
             }
         }
         
@@ -137,7 +144,7 @@
             }
         }
         
-        // Uso de metodos con el arreglo bidimensional para la demostracion de conocimiento en este mismo.
+        // Uso de metodos con el ArrayList bidimensional para la demostracion de conocimiento en este mismo.
         
         public static void mostrarMayorVida (ArrayList< ArrayList<Soldado> > tablero, String e)
         {
@@ -199,7 +206,7 @@
             return suma;
         }
         
-        // Desde ahora, metodos con arreglo estandar para trabajar el ordenamiento o metodos que lo requieran.
+        // Desde ahora, metodos con ArrayList estandar para trabajar el ordenamiento o metodos que lo requieran.
         
         public static void mostrarRankingMayor (ArrayList<Soldado> ejercito)
         { 
@@ -243,3 +250,5 @@
 	    }
   
     }
+    
+    
