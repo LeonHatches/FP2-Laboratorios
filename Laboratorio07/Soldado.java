@@ -4,11 +4,6 @@
     {
         private String  nombre, columna, ejercito;
         private int     vida, fila;
-        
-        public Soldado ()
-        {
-            nombre = "          ";
-        }
 
         public void setNombre (String n) {
                 nombre = n;

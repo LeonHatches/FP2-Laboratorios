@@ -17,7 +17,7 @@
             ejercito2 = crear (tablero, "2");
             mostrarTabla    (tablero);
             
-            /*
+            
             // Mostrar los de mayor vida segun el ejercito
             mostrarMayorVida    (tablero, "1");
             mostrarMayorVida    (tablero, "2");
@@ -32,7 +32,8 @@
             
             System.out.println ("\n| VIDA TOTAL DEL EJERCITO 2 |");
             System.out.println ("La vida total es: " + vida2 );
-
+            
+            /*
             // ArrayList estandar para ordenamientos
             System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
             mostrar (ejercito1);
@@ -145,7 +146,61 @@
             }
         }
         
+        // Uso de metodos con el Arreglo bidimensional para la demostracion de conocimiento en este mismo.
+        public static void mostrarMayorVida (Soldado [][] tablero, String e)
+        {
+        	int fila = 0, columna = 0;
+            
+            // LOS MAYORES VALORES INICIALES
+            for (int i = 0 ; i < tablero.length ; i++) {
+                for (int j = 0 ; j < tablero[i].length ; j++)
+                {
+                        if ( !(tablero[i][j] == null) && tablero[i][j].getEjercito().equals(e) )
+                        { fila = i; columna = j; break; }
+                }
+            }
+           
+           // BUSQUEDA DEL SOLDADO CON MAYOR VIDA 
+           for (int i = 0 ; i < tablero.length ; i++)
+           {
+                for (int j = 0 ; j < tablero[i].length ; j++){
+                    if ( !(tablero[i][j] == null) && tablero[i][j].getEjercito().equals(e) ) {
+                        if ( tablero[fila][columna].getVida() < tablero[i][j].getVida() )
+                        {
+                            fila    = i;
+                            columna = j;
+                        }
+                    }        
+                }
+            }
+            
+            // MOSTRAR
+            System.out.println ("\n\t| SOLDADO CON MAYOR VIDA DEL EJERCITO "+e+" |\n");
+            System.out.println (tablero[fila][columna]+"\n");
+        }
         
+        public static double mostrarPromedioVida (Soldado [][] tablero, String e)
+        {
+        	double suma = 0, cont = 0;
+            
+            // PROMEDIO DE VIDA
+            for (int i = 0 ; i < tablero.length ; i++)
+            {
+                 for (int j = 0 ; j < tablero[i].length ; j++){
+                     if ( !(tablero[i][j] == null) && tablero[i][j].getEjercito().equals(e) )
+                     {
+                          suma += tablero[i][j].getVida();
+                          cont++;
+                     }       
+                 }
+            }
+            
+             // MOSTRAR
+             System.out.println ("\n| PROMEDIO DE VIDA DEL EJERCITO "+e+" |");
+             System.out.println ("El promedio de vida es: " + (suma/cont) );
+             
+             return suma;
+        }
         
         
         
@@ -173,68 +228,6 @@
         
         
         /*
-        public static void mostrarTabla (ArrayList< ArrayList<Soldado> > tablero)
-        {
-            String letras [] = {"A","B","C","D","E","F","G","H","I","J"};
-            System.out.print ("     ");
-            
-            // MUESTRA LAS COLUMNAS
-            for (int i = 0 ; i < letras.length ; i++)
-            {
-                System.out.print (letras[i]+"            ");
-            }
-            System.out.println(" ");
-            
-            for (int i = 0 ; i < tablero.size() ; i++)
-            {
-            	// MUESTRA LAS FILAS
-                System.out.print (i+1);
-                for (Soldado soldado : tablero.get(i) )
-                {
-                        System.out.print (" "+soldado.getNombre()+" |");
-                }
-                System.out.println("\n-----------------------------------------------------------------"
-                	          +"------------------------------------------------------------------");
-            }
-        }
-        
-        // Uso de metodos con el ArrayList bidimensional para la demostracion de conocimiento en este mismo.
-        
-        public static void mostrarMayorVida (ArrayList< ArrayList<Soldado> > tablero, String e)
-        {
-            int fila = 0, columna = 0;
-            
-            // LOS MAYORES VALORES INICIALES
-            for (int i = 0 ; i < tablero.size() ; i++) {
-                for (int j = 0 ; j < tablero.get(i).size() ; j++)
-                {
-                        if ( !(tablero.get(i).get(j).getNombre().equals("          ")) &&
-                               tablero.get(i).get(j).getEjercito().equals(e)             )
-                        { fila = i; columna = j; break; }
-                }
-            }
-           
-           // BUSQUEDA DEL SOLDADO CON MAYOR VIDA 
-           for (int i = 0 ; i < tablero.size() ; i++)
-           {
-                for (int j = 0 ; j < tablero.get(i).size() ; j++){
-                    if (  !(tablero.get(i).get(j).getNombre().equals("          ")) &&
-                            tablero.get(i).get(j).getEjercito().equals(e)            )
-                    {
-                        if ( tablero.get(fila).get(columna).getVida() < tablero.get(i).get(j).getVida() )
-                        {
-                            fila = i;
-                            columna = j;
-                        }
-                    }        
-                }
-            }
-            
-            // MOSTRAR
-            System.out.println ("\n\t| SOLDADO CON MAYOR VIDA |\n");
-            System.out.println (tablero.get(fila).get(columna)+"\n");
-        }
-        
         public static double mostrarPromedioVida (ArrayList< ArrayList<Soldado> > tablero, String e)
         {
            double suma = 0, cont = 0;
