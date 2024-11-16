@@ -6,61 +6,75 @@
     {
         public static void main (String [] args)
         {
-            ArrayList <Soldado> ejercito1 = new ArrayList <Soldado>();
-            ArrayList <Soldado> ejercito2 = new ArrayList <Soldado>();
-            Soldado [][]          tablero = new Soldado [10][10];
-            
-            
-            // NOTA IMPORTANTE: Los ejercitos se ubicaran al final como STRINGS, 1 y 2 | Luego la vida (HP)
-            ejercito1 = crear (tablero, "1");
-            ejercito2 = crear (tablero, "2");
-            mostrarTabla    (tablero);
-            
-            
-            // Mostrar los de mayor vida segun el ejercito
-            mostrarMayorVida    (tablero, "1");
-            mostrarMayorVida    (tablero, "2");
-            
-            // Vida promedio de cada ejercito
-            double vida1 = mostrarPromedioVida (tablero, "1");
-            double vida2 = mostrarPromedioVida (tablero, "2");
-            
-            // MOSTRAR VIDA DE TODOS LOS SOLDADOS
-            System.out.println ("\n| VIDA TOTAL DEL EJERCITO 1 |");
-            System.out.println ("La vida total es: " + vida1 );
-            
-            System.out.println ("\n| VIDA TOTAL DEL EJERCITO 2 |");
-            System.out.println ("La vida total es: " + vida2 );
-            
-            // ArrayList estandar para ordenamientos
-            System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
-            mostrar (ejercito1);
-            
-            System.out.println("\n| SOLDADOS - EJERCITO 2 - ORDEN DE CREACION |");
-            mostrar (ejercito2);
-            
-            // RANKING DEL EJERCITO 1
-            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MAYOR A MENOR |");
-            mostrarRankingMayor (ejercito1);
-            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MENOR A MAYOR |");
-            mostrarRankingMenor (ejercito1);
-            
-            // RANKING DEL EJERCITO 2
-            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MAYOR A MENOR |");
-            mostrarRankingMayor (ejercito2);
-            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MENOR A MAYOR |");
-            mostrarRankingMenor (ejercito2);
-            
-            // GANADOR
-            if (vida1 == vida2)
-            	System.out.println("\n| EMPATE POR VIDA DEL EJERCITO IGUALES |");
-            
-            else if (vida1 > vida2)
-            	System.out.println("\n| EJERCITO 1 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
-            
-            else
-                System.out.println("\n| EJERCITO 2 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
-            
+        	int decision = 1;
+        	
+        	do
+        	{
+	            ArrayList <Soldado> ejercito1 = new ArrayList <Soldado>();
+	            ArrayList <Soldado> ejercito2 = new ArrayList <Soldado>();
+	            Soldado [][]          tablero = new Soldado [10][10];
+	            
+	            
+	            // NOTA IMPORTANTE: Los ejercitos se ubicaran al final como STRINGS, 1 y 2 | Luego la vida (HP)
+	            ejercito1 = crear (tablero, "1");
+	            ejercito2 = crear (tablero, "2");
+	            mostrarTabla    (tablero);
+	            
+	            
+	            // Mostrar los de mayor vida segun el ejercito
+	            mostrarMayorVida    (tablero, "1");
+	            mostrarMayorVida    (tablero, "2");
+	            
+	            // Vida promedio de cada ejercito
+	            double vida1 = mostrarPromedioVida (tablero, "1");
+	            double vida2 = mostrarPromedioVida (tablero, "2");
+	            
+	            // MOSTRAR VIDA DE TODOS LOS SOLDADOS
+	            System.out.println ("\n| VIDA TOTAL DEL EJERCITO 1 |");
+	            System.out.println ("La vida total es: " + vida1 );
+	            
+	            System.out.println ("\n| VIDA TOTAL DEL EJERCITO 2 |");
+	            System.out.println ("La vida total es: " + vida2 );
+	            
+	            // ArrayList estandar para ordenamientos
+	            System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
+	            mostrar (ejercito1);
+	            
+	            System.out.println("\n| SOLDADOS - EJERCITO 2 - ORDEN DE CREACION |");
+	            mostrar (ejercito2);
+	            
+	            // RANKING DEL EJERCITO 1
+	            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MAYOR A MENOR |");
+	            mostrarRankingMayor (ejercito1);
+	            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MENOR A MAYOR |");
+	            mostrarRankingMenor (ejercito1);
+	            
+	            // RANKING DEL EJERCITO 2
+	            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MAYOR A MENOR |");
+	            mostrarRankingMayor (ejercito2);
+	            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MENOR A MAYOR |");
+	            mostrarRankingMenor (ejercito2);
+	            
+	            // GANADOR
+	            if (vida1 == vida2)
+	            	System.out.println("\n| EMPATE POR VIDA DEL EJERCITO IGUALES |");
+	            
+	            else if (vida1 > vida2)
+	            	System.out.println("\n| EJERCITO 1 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
+	            
+	            else
+	                System.out.println("\n| EJERCITO 2 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
+	            
+	            decision = iteracion();
+        	} 
+            while (decision == 1);
+        }
+        
+        public static int iteracion ()
+        {
+        	Scanner sc = new Scanner (System.in);
+        	System.out.print ("\n¿Desea otra batalla?? | Si: 1 | No: 0 |: ");
+        	return sc.nextInt();
         }
         	
         public static int posicionRandom ()
