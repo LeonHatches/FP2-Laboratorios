@@ -1,7 +1,7 @@
     
     // LABORATORIO 07 - COMBINACION
 
-    import java.util.ArrayList;
+    import java.util.*;
     public class VideoJuego4
     {
         public static void main (String [] args)
@@ -10,7 +10,6 @@
             ArrayList <Soldado> ejercito2 = new ArrayList <Soldado>();
             Soldado [][]          tablero = new Soldado [10][10];
             
-            // LAB 07 - NUEVO | CREAR - INICIALIZAR - MOSTRAR TABLA COMBINADO
             
             // NOTA IMPORTANTE: Los ejercitos se ubicaran al final como STRINGS, 1 y 2 | Luego la vida (HP)
             ejercito1 = crear (tablero, "1");
@@ -33,7 +32,6 @@
             System.out.println ("\n| VIDA TOTAL DEL EJERCITO 2 |");
             System.out.println ("La vida total es: " + vida2 );
             
-            /*
             // ArrayList estandar para ordenamientos
             System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
             mostrar (ejercito1);
@@ -62,9 +60,9 @@
             
             else
                 System.out.println("\n| EJERCITO 2 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
-        */
+            
         }
-        
+        	
         public static int posicionRandom ()
         {
             return (int) (Math.random() * 10);
@@ -114,7 +112,7 @@
         public static void mostrarTabla (Soldado [][] tablero)
         {
             String letras [] = {"A","B","C","D","E","F","G","H","I","J"};
-            System.out.print ("          ");
+            System.out.print ("\n\n          ");
             
             // MUESTRA LAS COLUMNAS
             for (int i = 0 ; i < letras.length ; i++)
@@ -202,59 +200,7 @@
              return suma;
         }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-        public static double mostrarPromedioVida (ArrayList< ArrayList<Soldado> > tablero, String e)
-        {
-           double suma = 0, cont = 0;
-           
-           // PROMEDIO DE VIDA
-           for (int i = 0 ; i < tablero.size() ; i++)
-           {
-                for (int j = 0 ; j < tablero.get(i).size() ; j++)
-                {
-                   if (  !(tablero.get(i).get(j).getNombre().equals("          ")) &&
-                           tablero.get(i).get(j).getEjercito().equals(e)             )
-                    {
-                         suma += tablero.get(i).get(j).getVida();
-                         cont++;
-                    }       
-                }
-           }
-           
-            // MOSTRAR
-            System.out.println ("\n| PROMEDIO DE VIDA |");
-            System.out.println ("El promedio de vida es: " + (suma/cont) );
-            
-            return suma;
-        }
-        
         // Desde ahora, metodos con ArrayList estandar para trabajar el ordenamiento o metodos que lo requieran.
-        
         public static void mostrarRankingMayor (ArrayList<Soldado> ejercito)
         { 
         	Soldado intercambio;
@@ -295,6 +241,5 @@
             for (int i = 0 ; i < ejercito.size() ; i++)
                 System.out.println("\t| SOLDADO N-"+(i+1)+" |\n"+ejercito.get(i)+"\n");
         }
-    */
     }
 
