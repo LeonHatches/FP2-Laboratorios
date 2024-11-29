@@ -1,7 +1,7 @@
 
     public class Soldado
     {
-        private String  nombre, columna, ejercito;
+        private String  nombre, columna;
         private int     vida, fila;
 
         public void setNombre (String n) {
@@ -16,9 +16,6 @@
         public void setColumna (String c) {
                 columna = c;
         }
-        public void setEjercito (String e) {
-            ejercito = e;
-        }
 
         public String getNombre ()
         {	return nombre;	}
@@ -31,9 +28,6 @@
 
         public String getColumna ()
         {	return columna;	}
-        
-        public String getEjercito ()
-        {       return ejercito;    }
             
         public String toString ()
         {
