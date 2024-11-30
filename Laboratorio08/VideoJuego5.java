@@ -10,8 +10,8 @@
         	
         	do
         	{
-	            HashMap <String, Soldado> ejercito1 = new HashMap <String, Soldado>();
-	            HashMap <String, Soldado> ejercito2 = new HashMap <String, Soldado>();
+	            HashMap <Integer, Soldado> ejercito1 = new HashMap <Integer, Soldado>();
+	            HashMap <Integer, Soldado> ejercito2 = new HashMap <Integer, Soldado>();
 	            Soldado [][]                 tablero = new Soldado [10][10];
 	            
 	            // NOTA IMPORTANTE: Los ejercitos se ubicaran al final como STRINGS, 1 y 2 | Luego la vida (HP)
@@ -36,10 +36,10 @@
 	            
 	            // HashMap para ordenamientos
 	            System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
-	            mostrarOrden (ejercito1);
+	            mostrar (ejercito1);
 	            
 	            System.out.println("\n| SOLDADOS - EJERCITO 2 - ORDEN DE CREACION |");
-	            mostrarOrden (ejercito2);
+	            mostrar (ejercito2);
 	            
 	            // RANKING DEL EJERCITO 1
 	            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MAYOR A MENOR |");
@@ -84,10 +84,10 @@
             return (int) (Math.random() * 5 + 1);
         }
         
-        public static HashMap <String, Soldado> crear (Soldado [][] tablero, String e)
+        public static HashMap <Integer, Soldado> crear (Soldado [][] tablero, String e)
         {
             int                       aleatorio = posicionRandom()+1, fila, columna;
-            HashMap <String, Soldado>  ejercito = new HashMap <String, Soldado>();
+            HashMap <Integer, Soldado>  ejercito = new HashMap <Integer, Soldado>();
             
             for (int i = 0 ; i < aleatorio ; i++)
             {
@@ -104,7 +104,7 @@
                 inicializar (tablero, fila, columna, i, e);
 
                 // HASHMAP PARA TRABAJAR CON ORDENAMIENTO
-            	ejercito.put(tablero[fila][columna].getNombre(), tablero[fila][columna]);
+            	ejercito.put(i, tablero[fila][columna]);
             } 
             return ejercito;
         }
@@ -158,11 +158,11 @@
         }
         
         // Uso de HASHMAP para la demostracion de conocimiento
-        public static void mostrarMayorVida (HashMap <String, Soldado> ejercito, String e)
+        public static void mostrarMayorVida (HashMap <Integer, Soldado> ejercito, String e)
         {
-        	String keyMayor = "Soldado0X"+e;
+        	int keyMayor = 0;
         	
-        	for  (String key : ejercito.keySet() )
+        	for  (int key : ejercito.keySet() )
         	{
         		if ( ejercito.get(keyMayor).getVida() < ejercito.get(key).getVida() )
         			keyMayor = key;
@@ -173,12 +173,12 @@
             System.out.println (ejercito.get(keyMayor)+"\n");
         }
         
-        public static double mostrarPromedioVida (HashMap <String, Soldado> ejercito, String e)
+        public static double mostrarPromedioVida (HashMap <Integer, Soldado> ejercito, String e)
         {
         	double suma = 0;
             
             // PROMEDIO DE VIDA
-        	for  (String key : ejercito.keySet() )
+        	for  (int key : ejercito.keySet() )
         		suma += ejercito.get(key).getVida();
         	
 			// MOSTRAR
@@ -188,54 +188,47 @@
 			return suma;
         }
         
-        public static void rankingMayor (HashMap <String, Soldado> ejercito)
-        {
-        	HashMap <Integer, Soldado> ejercitoMayor = new HashMap <Integer, Soldado>();
-        	int i = 0;
+        public static void rankingMayor (HashMap <Integer, Soldado> ejercito)
+        { 
+        	Soldado intercambio;
         	
-        	for  (String key : ejercito.keySet() )
-        	{
-        		ejercitoMayor.put( ejercito.get(key).getVida()*10+i , ejercito.get(key) );
-        		i++;
-        	}
-        	
-        	mostrar (ejercitoMayor);
+        	// Algoritmo de ordenamiento Insercion
+    		for (int i = 1 ; i < ejercito.size() ; i++)
+    		{
+    			for (int r = i ; r > 0 && ejercito.get(r-1).getVida() < ejercito.get(r).getVida() ; r--)
+    			{
+                    intercambio = ejercito.get(r-1);
+                    ejercito.put(r-1, ejercito.get(r));
+                    ejercito.put(r, intercambio);
+    			}
+    		}
+    		
+    		mostrar (ejercito);
         }
         
-        public static void rankingMenor (HashMap <String, Soldado> ejercito)
+        public static void rankingMenor (HashMap <Integer, Soldado> ejercito)
         {
-        	HashMap <Integer, Soldado> ejercitoMenor = new HashMap <Integer, Soldado>();
-        	int i = 9;
-        	
-        	for  (String key : ejercito.keySet() )
-        	{
-        		ejercitoMenor.put( ejercito.get(key).getVida()*10+i , ejercito.get(key) );
-        		i++;
-        	}
-        	
-        	mostrar (ejercitoMenor);
+            Soldado intercambio;
+            
+            // Algoritmo de ordenamiento Burbuja
+            for (int i = ejercito.size() - 1 ; i > 0 ; i--)
+                for (int n = 0 ; n < i ; n++)
+                {
+                    if ( ejercito.get(n).getVida() > ejercito.get(n+1).getVida() )
+                    {
+                        intercambio = ejercito.get(n+1);
+                        ejercito.put(n+1, ejercito.get(n));
+                        ejercito.put(n, intercambio);
+                    }
+                }
+            
+            mostrar(ejercito);
         }
         
         public static void mostrar (HashMap <Integer, Soldado> ejercito)
 	    {
-        	int i = 1;
-        	
-        	for  (int key : ejercito.keySet() )
-        	{
-                System.out.println("\t| SOLDADO N-"+i+" |\n"+ejercito.get(key)+"\n");
-                i++;
-        	}
-        }
-        
-        public static void mostrarOrden (HashMap <String, Soldado> ejercito)
-	    {
-        	int i = 1;
-        	
-        	for  (String key : ejercito.keySet() )
-        	{
-                System.out.println("\t| SOLDADO N-"+i+" |\n"+ejercito.get(key)+"\n");
-                i++;
-        	}
+            for (int i = 0 ; i < ejercito.size() ; i++)
+                System.out.println("\t| SOLDADO N-"+(i+1)+" |\n"+ejercito.get(i)+"\n");
         }
     }
     
