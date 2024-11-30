@@ -34,25 +34,24 @@
 	            System.out.println ("\n| VIDA TOTAL DEL EJERCITO 2 |");
 	            System.out.println ("La vida total es: " + vida2 );
 	            
-	            /*
-	            // ArrayList estandar para ordenamientos
+	            // HashMap para ordenamientos
 	            System.out.println("\n| SOLDADOS - EJERCITO 1 - ORDEN DE CREACION |");
-	            mostrar (ejercito1);
+	            mostrarOrden (ejercito1);
 	            
 	            System.out.println("\n| SOLDADOS - EJERCITO 2 - ORDEN DE CREACION |");
-	            mostrar (ejercito2);
+	            mostrarOrden (ejercito2);
 	            
 	            // RANKING DEL EJERCITO 1
 	            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MAYOR A MENOR |");
-	            mostrarRankingMayor (ejercito1);
+	            rankingMayor (ejercito1);
 	            System.out.println("\n| SOLDADOS - EJERCITO 1 - RANKING DE VIDA MENOR A MAYOR |");
-	            mostrarRankingMenor (ejercito1);
+	            rankingMenor (ejercito1);
 	            
 	            // RANKING DEL EJERCITO 2
 	            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MAYOR A MENOR |");
-	            mostrarRankingMayor (ejercito2);
+	            rankingMayor (ejercito2);
 	            System.out.println("\n| SOLDADOS - EJERCITO 2 - RANKING DE VIDA MENOR A MAYOR |");
-	            mostrarRankingMenor (ejercito2);
+	            rankingMenor (ejercito2);
 	            
 	            // GANADOR
 	            if (vida1 == vida2)
@@ -63,7 +62,7 @@
 	            
 	            else
 	                System.out.println("\n| EJERCITO 2 - GANADOR POR MAYOR VIDA DEL EJERCITO |");
-	            */
+	            
 	            decision = iteracion();
         	} 
             while (decision == 1);
@@ -106,7 +105,7 @@
 
                 // HASHMAP PARA TRABAJAR CON ORDENAMIENTO
             	ejercito.put(tablero[fila][columna].getNombre(), tablero[fila][columna]);
-            }
+            } 
             return ejercito;
         }
         
@@ -189,47 +188,55 @@
 			return suma;
         }
         
-        /*
-        // Desde ahora, metodos con ArrayList estandar para trabajar el ordenamiento o metodos que lo requieran.
-        public static void mostrarRankingMayor (ArrayList<Soldado> ejercito)
-        { 
-        	Soldado intercambio;
-        	
-        	// Algoritmo de ordenamiento Insercion
-    		for (int i = 1 ; i < ejercito.size() ; i++)
-    		{
-    			for (int r = i ; r > 0 && ejercito.get(r-1).getVida() < ejercito.get(r).getVida() ; r--)
-    			{
-                            intercambio = ejercito.remove(r-1);
-                            ejercito.add(r, intercambio);
-    			}
-    		}
-    		
-    		mostrar (ejercito);
-        }
-        
-        public static void mostrarRankingMenor (ArrayList<Soldado> ejercito)
+        public static void rankingMayor (HashMap <String, Soldado> ejercito)
         {
-            Soldado intercambio;
-            
-            // Algoritmo de ordenamiento Burbuja
-            for (int i = ejercito.size() - 1 ; i > 0 ; i--)
-                for (int n = 0 ; n < i ; n++)
-                {
-                    if ( ejercito.get(n).getVida() > ejercito.get(n+1).getVida() )
-                    {
-                        intercambio = ejercito.remove(n);
-                        ejercito.add(n+1, intercambio);
-                    }
-                }
-            
-            mostrar(ejercito);
+        	HashMap <Integer, Soldado> ejercitoMayor = new HashMap <Integer, Soldado>();
+        	int i = 0;
+        	
+        	for  (String key : ejercito.keySet() )
+        	{
+        		ejercitoMayor.put( ejercito.get(key).getVida()*10+i , ejercito.get(key) );
+        		i++;
+        	}
+        	
+        	mostrar (ejercitoMayor);
         }
         
-        public static void mostrar (ArrayList<Soldado> ejercito)
+        public static void rankingMenor (HashMap <String, Soldado> ejercito)
+        {
+        	HashMap <Integer, Soldado> ejercitoMenor = new HashMap <Integer, Soldado>();
+        	int i = 9;
+        	
+        	for  (String key : ejercito.keySet() )
+        	{
+        		ejercitoMenor.put( ejercito.get(key).getVida()*10+i , ejercito.get(key) );
+        		i++;
+        	}
+        	
+        	mostrar (ejercitoMenor);
+        }
+        
+        public static void mostrar (HashMap <Integer, Soldado> ejercito)
 	    {
-            for (int i = 0 ; i < ejercito.size() ; i++)
-                System.out.println("\t| SOLDADO N-"+(i+1)+" |\n"+ejercito.get(i)+"\n");
-        }   
-    */
+        	int i = 1;
+        	
+        	for  (int key : ejercito.keySet() )
+        	{
+                System.out.println("\t| SOLDADO N-"+i+" |\n"+ejercito.get(key)+"\n");
+                i++;
+        	}
+        }
+        
+        public static void mostrarOrden (HashMap <String, Soldado> ejercito)
+	    {
+        	int i = 1;
+        	
+        	for  (String key : ejercito.keySet() )
+        	{
+                System.out.println("\t| SOLDADO N-"+i+" |\n"+ejercito.get(key)+"\n");
+                i++;
+        	}
+        }
     }
+    
+    
